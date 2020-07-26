@@ -1,0 +1,17 @@
+{
+    "name": "boosted-sort",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Rustam-Abrahamyan/boosted-sort.git"
+    },
+    "author": "Rustam Abrahamyan",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Rustam-Abrahamyan/boosted-sort/issues"
+    },
+    "homepage": "https://github.com/Rustam-Abrahamyan/boosted-sort#readme"
+}
