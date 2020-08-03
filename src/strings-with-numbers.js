@@ -1,3 +1,5 @@
+import { isObject } from "./utils";
+
 // Regular expression to separate the digit string from the non-digit strings
 const regParts = /\d+|\D+/g;
 // Regular expression to test if the string has a digit
@@ -8,18 +10,16 @@ const regDigit = /\d/;
  *
  * @param {Array|Object[]} data
  * @param {('asc'|'desc')} orderBy
- * @param {String} prop
+ * @param {String|Function} sortBy
  * @returns {Array|Object[]}
  * @example
  * StringsWithNumbers(["Test-1", "1", 5])
  * StringsWithNumbers([{name: "Name-1"}, {name: "Name-2"}, {name: "Name-3"}], "asc", "name")
  */
-const StringsWithNumbers = (data, orderBy = "asc", prop = "") => {
-    let isArrayOfObjects = typeof data[0] === "object";
-
-    return data.sort((a, b) => {
-        a = (isArrayOfObjects ? a[prop] : a).toUpperCase();
-        b = (isArrayOfObjects ? b[prop] : b).toUpperCase();
+const StringsWithNumbers = (data, orderBy = "asc", sortBy = "") =>
+    data.sort((a, b) => {
+        a = (typeof sortBy === "function" ? sortBy(a) : (isObject(a) ? a[sortBy] : a)).toUpperCase();
+        b = (typeof sortBy === "function" ? sortBy(b) : (isObject(b) ? b[sortBy] : b)).toUpperCase();
 
         const aParts = a.match(regParts);
         const bParts = b.match(regParts);
@@ -54,6 +54,5 @@ const StringsWithNumbers = (data, orderBy = "asc", prop = "") => {
 
         return orderBy === "asc" ? (a >= b) - (a <= b) : (a <= b) - (a >= b);
     });
-};    
 
 export default StringsWithNumbers;
