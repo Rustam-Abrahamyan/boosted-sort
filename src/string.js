@@ -7,7 +7,7 @@ import { isObject } from "./utils";
  * @param {String} field
  * @returns {Boolean}
  */
-const DateTimeSorter = ({ a, b, direction, field }) => {
+const StringSorter = ({ a, b, direction, field }) => {
     const a_state = isObject(a) ? a[field] : a;
     const b_state = isObject(b) ? b[field] : b;
 
@@ -15,8 +15,8 @@ const DateTimeSorter = ({ a, b, direction, field }) => {
     if (!b_state) return +1;
 
     return direction
-        ? new Date(b_state) - new Date(a_state)
-        : new Date(a_state) - new Date(b_state);
+        ? a_state.localeCompare(b_state)
+        : b_state.localeCompare(a_state);
 };
 
-export default DateTimeSorter;
+export default StringSorter;
